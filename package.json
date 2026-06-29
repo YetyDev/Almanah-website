@@ -1,0 +1,17 @@
+{
+  "name": "almana-website",
+  "version": "1.0.0",
+  "description": "Redesigned Almana Care and Love Outreach Foundation Website with Node.js backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "morgan": "^1.10.0"
+  },
+  "author": "",
+  "license": "ISC"
+}

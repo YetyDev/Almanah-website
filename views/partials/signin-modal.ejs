@@ -1,0 +1,119 @@
+<!-- Admin Sign In Modal Overlay -->
+<div class="signin-modal-overlay" id="signin-modal-overlay">
+  <div class="signin-modal-card">
+    <button class="signin-modal-close" id="signin-modal-close" aria-label="Close Modal">&times;</button>
+    <div class="signin-modal-header">
+      <img src="/logo.jpeg" alt="Almanah Logo" class="signin-modal-logo">
+      <h3>Admin Portal</h3>
+      <p>Sign in to access your control panel</p>
+    </div>
+    
+    <div class="signin-modal-error" id="signin-modal-error" style="display: none;">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>
+      <span id="signin-error-text"></span>
+    </div>
+
+    <form class="signin-modal-form" id="signin-modal-form">
+      <div class="form-group-modern">
+        <input type="text" class="form-control-modern" placeholder=" " required id="signin-username">
+        <label class="form-label-modern">Username</label>
+      </div>
+
+      <div class="form-group-modern">
+        <input type="password" class="form-control-modern" placeholder=" " required id="signin-password">
+        <label class="form-label-modern">Password</label>
+      </div>
+
+      <button type="submit" class="btn btn-primary signin-modal-btn">Sign In</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modalOverlay = document.getElementById('signin-modal-overlay');
+    const closeBtn = document.getElementById('signin-modal-close');
+    const signinForm = document.getElementById('signin-modal-form');
+    const errorDiv = document.getElementById('signin-modal-error');
+    const errorText = document.getElementById('signin-error-text');
+
+    // Intercept clicks on any "Sign In" link
+    document.querySelectorAll('.nav-signin-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (modalOverlay) {
+          modalOverlay.classList.add('active');
+          // Auto-focus username input
+          setTimeout(() => {
+            const usernameInput = document.getElementById('signin-username');
+            if (usernameInput) usernameInput.focus();
+          }, 100);
+        }
+      });
+    });
+
+    // Close modal
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        modalOverlay.classList.remove('active');
+        if (signinForm) signinForm.reset();
+        if (errorDiv) errorDiv.style.display = 'none';
+      });
+    }
+
+    if (modalOverlay) {
+      modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+          modalOverlay.classList.remove('active');
+          if (signinForm) signinForm.reset();
+          if (errorDiv) errorDiv.style.display = 'none';
+        }
+      });
+    }
+
+    // Escape key closes modal
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('active')) {
+        modalOverlay.classList.remove('active');
+        if (signinForm) signinForm.reset();
+        if (errorDiv) errorDiv.style.display = 'none';
+      }
+    });
+
+    // AJAX submit form
+    if (signinForm) {
+      signinForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const username = document.getElementById('signin-username').value;
+        const password = document.getElementById('signin-password').value;
+
+        if (errorDiv) errorDiv.style.display = 'none';
+
+        try {
+          const response = await fetch('/api/admin/login', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+          });
+
+          const data = await response.json();
+          if (data.success) {
+            window.location.href = '/admin';
+          } else {
+            if (errorText && errorDiv) {
+              errorText.textContent = data.error || 'Invalid credentials.';
+              errorDiv.style.display = 'flex';
+            }
+          }
+        } catch (err) {
+          if (errorText && errorDiv) {
+            errorText.textContent = 'An error occurred. Please try again.';
+            errorDiv.style.display = 'flex';
+          }
+        }
+      });
+    }
+  });
+</script>

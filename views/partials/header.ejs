@@ -1,0 +1,41 @@
+<header id="main-header">
+  <div class="container nav">
+    <a href="/" class="logo-container" id="nav-logo">
+      <img src="/logo.jpeg" alt="Almanah Foundation Logo">
+      <div class="logo-text">
+        Almanah
+        <span>Care & Love Foundation</span>
+      </div>
+    </a>
+
+    <button class="mobile-nav-toggle" aria-label="Toggle Navigation" id="mobile-toggle">
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+      <span class="hamburger-bar"></span>
+    </button>
+
+    <nav id="navbar">
+      <ul>
+        <li><a href="/" class="<%= page === 'home' ? 'active' : '' %>">Home</a></li>
+        <li><a href="/about" class="<%= page === 'about' ? 'active' : '' %>">About Us</a></li>
+        <li><a href="/programs" class="<%= page === 'programs' ? 'active' : '' %>">Programs</a></li>
+        <li><a href="/events" class="<%= page === 'events' ? 'active' : '' %>">Events</a></li>
+        <li><a href="/impact" class="<%= page === 'impact' ? 'active' : '' %>">Impact</a></li>
+        <li><a href="/contact" class="<%= page === 'contact' ? 'active' : '' %>">Contact Us</a></li>
+      </ul>
+      
+      <div class="nav-mobile-actions">
+        <a href="/admin" class="nav-signin-link <%= page === 'admin' ? 'active' : '' %>">Sign In</a>
+        <a href="/#donation" class="btn btn-secondary">Donate Now</a>
+      </div>
+    </nav>
+
+    <div class="header-actions">
+      <a href="/admin" class="nav-signin-link <%= page === 'admin' ? 'active' : '' %>">Sign In</a>
+      <a href="/#donation" class="btn btn-secondary">Donate Now</a>
+    </div>
+  </div>
+</header>
+
+<%- include('signin-modal') %>
+

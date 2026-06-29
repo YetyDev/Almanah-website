@@ -1,0 +1,432 @@
+<%- include('partials/head', { title: 'Admin Dashboard' }) %>
+<%- include('partials/header') %>
+
+<%
+  const getSymbol = (currency) => {
+    switch(currency) {
+      case 'NGN': return '₦';
+      case 'GBP': return '£';
+      case 'EUR': return '€';
+      case 'USD':
+      default: return '$';
+    }
+  };
+%>
+
+<style>
+  .admin-dashboard {
+    padding: 4rem 0 8rem 0;
+    background-color: var(--light);
+    min-height: 80vh;
+  }
+
+  .admin-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+
+  .admin-title-row h1 {
+    font-size: 2.5rem;
+    font-family: var(--font-title);
+  }
+
+  /* Metric Cards */
+  .admin-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .metric-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+  }
+
+  .metric-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(76, 27, 111, 0.2);
+  }
+
+  .metric-icon-box {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .metric-card:nth-child(1) .metric-icon-box {
+    background-color: rgba(217, 156, 43, 0.15);
+    color: var(--accent);
+  }
+
+  .metric-card:nth-child(2) .metric-icon-box {
+    background-color: rgba(76, 27, 111, 0.08);
+    color: var(--primary);
+  }
+
+  .metric-card:nth-child(3) .metric-icon-box {
+    background-color: rgba(209, 46, 123, 0.08);
+    color: var(--secondary);
+  }
+
+  .metric-icon-box svg {
+    width: 28px;
+    height: 28px;
+    fill: currentColor;
+  }
+
+  .metric-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .metric-info span {
+    font-size: 0.9rem;
+    font-weight: 550;
+    color: var(--text-muted);
+  }
+
+  .metric-info strong {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.2;
+    font-family: var(--font-title);
+  }
+
+  /* Admin Content Section */
+  .admin-panel-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--border-radius);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Navigation Tabs */
+  .admin-tabs {
+    display: flex;
+    border-bottom: 2px solid var(--border);
+    gap: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .tab-btn {
+    background: none;
+    border: none;
+    font-family: var(--font-title);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    padding: 1rem 0;
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition);
+  }
+
+  .tab-btn:hover {
+    color: var(--primary);
+  }
+
+  .tab-btn.active {
+    color: var(--primary);
+  }
+
+  .tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--primary);
+    border-radius: 100px;
+  }
+
+  /* Tables */
+  .admin-table-container {
+    display: none;
+    overflow-x: auto;
+  }
+
+  .admin-table-container.active {
+    display: block;
+    animation: fadeIn 0.4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.5rem;
+    text-align: left;
+  }
+
+  th, td {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.95rem;
+  }
+
+  th {
+    font-family: var(--font-title);
+    font-weight: 600;
+    color: var(--dark);
+    background-color: var(--light);
+  }
+
+  tr:hover td {
+    background-color: rgba(76, 27, 111, 0.02);
+  }
+
+  .badge-status {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 100px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .badge-status.success {
+    background-color: rgba(46, 209, 113, 0.15);
+    color: #1b8a43;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--text-muted);
+  }
+
+  .empty-state svg {
+    width: 64px;
+    height: 64px;
+    fill: rgba(76, 27, 111, 0.2);
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 992px) {
+    .admin-metrics {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+  }
+</style>
+
+<div class="admin-dashboard">
+  <div class="container">
+    
+    <div class="admin-title-row">
+      <div>
+        <span class="hero-tagline" style="margin-bottom: 0.75rem;">Backend Portal</span>
+        <h1>Admin Control Panel</h1>
+      </div>
+      <a href="/admin/logout" class="btn btn-secondary" style="background: linear-gradient(135deg, #d12e7b 0%, #ff5e36 100%); border: none;">Sign Out</a>
+    </div>
+
+    <!-- Metrics Summary -->
+    <div class="admin-metrics">
+      
+      <!-- Metric 1: Total Donations -->
+      <div class="metric-card">
+        <div class="metric-icon-box">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </div>
+        <div class="metric-info">
+          <span>Total Received</span>
+          <% 
+            let totals = {};
+            donations.forEach(d => {
+              const cur = d.currency || 'USD';
+              totals[cur] = (totals[cur] || 0) + d.amount;
+            });
+            const formattedTotals = Object.keys(totals).map(cur => {
+              return getSymbol(cur) + totals[cur].toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+            }).join(' / ');
+          %>
+          <strong style="font-size: 1.3rem; word-break: break-all; margin-top: 0.25rem;"><%= formattedTotals || '$0' %></strong>
+        </div>
+      </div>
+
+      <!-- Metric 2: Contact Inquiries -->
+      <div class="metric-card">
+        <div class="metric-icon-box">
+          <svg viewBox="0 0 24 24">
+            <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
+          </svg>
+        </div>
+        <div class="metric-info">
+          <span>Inquiries</span>
+          <strong><%= messages.length %></strong>
+        </div>
+      </div>
+
+      <!-- Metric 3: Newsletter Subscribers -->
+      <div class="metric-card">
+        <div class="metric-icon-box">
+          <svg viewBox="0 0 24 24">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+          </svg>
+        </div>
+        <div class="metric-info">
+          <span>Subscribers</span>
+          <strong><%= newsletter.length %></strong>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Data Tables Card -->
+    <div class="admin-panel-card">
+      
+      <!-- Tabs -->
+      <div class="admin-tabs">
+        <button class="tab-btn active" data-target="tab-donations">Donations (<%= donations.length %>)</button>
+        <button class="tab-btn" data-target="tab-messages">Contact Messages (<%= messages.length %>)</button>
+        <button class="tab-btn" data-target="tab-newsletter">Subscribers (<%= newsletter.length %>)</button>
+      </div>
+
+      <!-- Tab Content: Donations -->
+      <div class="admin-table-container active" id="tab-donations">
+        <% if (donations.length === 0) { %>
+          <div class="empty-state">
+            <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            <h3>No Donations Yet</h3>
+            <p>Donations simulated on the homepage will be logged here.</p>
+          </div>
+        <% } else { %>
+          <table>
+            <thead>
+              <tr>
+                <th>Transaction ID</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% donations.forEach(d => { %>
+                <tr>
+                  <td style="font-family: monospace; font-weight: 600; color: var(--primary);"><%= d.id %></td>
+                  <td style="font-weight: 700; color: var(--dark);"><%= getSymbol(d.currency) %><%= d.amount.toFixed(2) %></td>
+                  <td><span class="badge-status success"><%= d.status %></span></td>
+                  <td style="color: var(--text-muted);"><%= new Date(d.donatedAt).toLocaleString() %></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        <% } %>
+      </div>
+
+      <!-- Tab Content: Contact Messages -->
+      <div class="admin-table-container" id="tab-messages">
+        <% if (messages.length === 0) { %>
+          <div class="empty-state">
+            <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
+            <h3>No Messages Yet</h3>
+            <p>Outreach messages submitted via the contact form will appear here.</p>
+          </div>
+        <% } else { %>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Contact Info</th>
+                <th>Message</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% messages.forEach(m => { %>
+                <tr>
+                  <td style="font-weight: 600; color: var(--dark);"><%= m.name %></td>
+                  <td>
+                    <div style="font-weight: 500;"><%= m.email %></div>
+                    <div style="font-size: 0.85rem; color: var(--text-muted);"><%= m.phone %></div>
+                  </td>
+                  <td style="max-width: 350px; line-height: 1.5; color: var(--text);"><%= m.message %></td>
+                  <td style="color: var(--text-muted); font-size: 0.9rem;"><%= new Date(m.submittedAt).toLocaleString() %></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        <% } %>
+      </div>
+
+      <!-- Tab Content: Newsletter -->
+      <div class="admin-table-container" id="tab-newsletter">
+        <% if (newsletter.length === 0) { %>
+          <div class="empty-state">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            <h3>No Subscribers Yet</h3>
+            <p>Email sign-ups from the footer form will be logged here.</p>
+          </div>
+        <% } else { %>
+          <table>
+            <thead>
+              <tr>
+                <th>Email Address</th>
+                <th>Subscribed On</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% newsletter.forEach(n => { %>
+                <tr>
+                  <td style="font-weight: 600; color: var(--dark);"><%= n.email %></td>
+                  <td style="color: var(--text-muted);"><%= new Date(n.subscribedAt).toLocaleString() %></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        <% } %>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    
+    // Tab switching logic
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tableContainers = document.querySelectorAll('.admin-table-container');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Deactivate all tabs
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tableContainers.forEach(c => c.classList.remove('active'));
+
+        // Activate clicked tab
+        btn.classList.add('active');
+        const targetId = btn.getAttribute('data-target');
+        document.getElementById(targetId).classList.add('active');
+      });
+    });
+
+  });
+</script>
+
+<%- include('partials/footer') %>
