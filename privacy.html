@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy | Almanah Care and Love Outreach Foundation</title>
+  <meta name="description"
+    content="Your privacy is important to us. Learn how Almanah Care and Love Outreach Foundation collects, uses, and protects your information.">
+  <link rel="stylesheet" href="public/css/style.css">
+</head>
+
+<body>
+  <div
+    style="background: #e65c00; color: white; text-align: center; padding: 12px; font-family: system-ui, sans-serif; font-weight: 600; position: sticky; top: 0; z-index: 99999; font-size: 14px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    ⚠️ Legacy Static File: The redesigned animated website has been migrated to Node.js! Run <code>npm start</code> in
+    the terminal and open <a href="http://localhost:3000/privacy"
+      style="color: white; text-decoration: underline; margin-left: 5px;">http://localhost:3000/privacy</a> to view it.
+  </div>
+
+  <!-- HEADER -->
+  <header id="main-header">
+    <div class="container nav">
+      <a href="index.html" class="logo-container" id="nav-logo">
+        <img src="logo.jpeg" alt="Almanah Foundation Logo">
+        <div class="logo-text">
+          Almanah
+          <span>Care & Love Foundation</span>
+        </div>
+      </a>
+
+      <button class="mobile-nav-toggle" aria-label="Toggle Navigation" id="mobile-toggle">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+
+      <nav id="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="index.html#pillars">Programs</a></li>
+          <li><a href="index.html#programs">Impact</a></li>
+          <li><a href="index.html#faq">Events</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+
+        <div class="nav-mobile-actions">
+          <a href="/admin" class="nav-signin-link">Sign In</a>
+          <a href="index.html#donation" class="btn btn-secondary">Donate Now</a>
+        </div>
+      </nav>
+
+      <div class="header-actions">
+        <a href="/admin" class="nav-signin-link">Sign In</a>
+        <a href="index.html#donation" class="btn btn-secondary">Donate Now</a>
+      </div>
+    </div>
+  </header>
+
+  <style>
+    .policy-hero-layout {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4rem;
+      text-align: left;
+      padding: 2rem 0;
+      position: relative;
+      z-index: 3;
+    }
+    .trust-card-glass {
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--border-radius);
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 320px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 2;
+      transform: perspective(1000px) rotateY(-10deg) rotateX(10deg);
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s ease, border-color 0.5s ease;
+    }
+    .trust-card-glass:hover {
+      transform: perspective(1000px) rotateY(-2deg) rotateX(2deg) translateY(-5px) !important;
+      box-shadow: 0 25px 50px rgba(209, 46, 123, 0.2) !important;
+      border-color: rgba(255, 255, 255, 0.18) !important;
+    }
+    @keyframes badgeDotPulseSecondary {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(209, 46, 123, 0.7);
+      }
+      70% {
+        transform: scale(1.2);
+        opacity: 0.6;
+        box-shadow: 0 0 0 6px rgba(209, 46, 123, 0);
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+        box-shadow: 0 0 0 0 rgba(209, 46, 123, 0);
+      }
+    }
+    @media (max-width: 991px) {
+      .policy-hero-layout {
+        flex-direction: column;
+        text-align: center !important;
+        gap: 3rem !important;
+        padding: 1rem 0;
+      }
+      .policy-hero-text h1 {
+        text-align: center !important;
+      }
+      .policy-hero-text .about-hero-description {
+        text-align: center !important;
+        margin: 0 auto !important;
+      }
+      .trust-card-glass {
+        transform: none !important;
+      }
+    }
+  </style>
+
+  <!-- HERO SECTION -->
+  <section class="about-hero policy-hero">
+    <div class="about-hero-glow-left"></div>
+    <div class="container">
+      <div class="policy-hero-layout">
+        
+        <!-- Text Content -->
+        <div class="policy-hero-text" style="flex: 1.2;">
+          <div class="about-hero-badge reveal fade-in-up">
+            <span class="badge-dot" style="background-color: var(--secondary); animation: badgeDotPulseSecondary 2s infinite;"></span>
+            Legal & Safety
+          </div>
+          <h1 class="reveal fade-in-up delay-1" style="text-align: left; margin-bottom: 1.5rem;">Privacy <span>Policy</span></h1>
+          <p class="about-hero-description reveal fade-in-up delay-2" style="text-align: left; margin: 0; max-width: 100%;">
+            We hold your trust in the highest regard. Our Privacy Policy details our unwavering commitment to protecting your personal information and ensuring data safety.
+          </p>
+        </div>
+        
+        <!-- Visual Shield Card -->
+        <div class="policy-hero-visual reveal fade-in-right delay-3" style="flex: 0.8; display: flex; justify-content: center; position: relative;">
+          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 220px; height: 220px; background: radial-gradient(circle, rgba(209, 46, 123, 0.25) 0%, transparent 70%); filter: blur(35px); border-radius: 50%; pointer-events: none; z-index: 1;"></div>
+          
+          <div class="trust-card-glass">
+            <div style="width: 70px; height: 70px; background: rgba(76, 27, 111, 0.6); border: 1px solid rgba(209, 46, 123, 0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto; box-shadow: 0 0 20px rgba(209, 46, 123, 0.3);">
+              <svg viewBox="0 0 24 24" style="width: 36px; height: 36px; fill: var(--accent);">
+                <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
+              </svg>
+            </div>
+            <h3 style="color: var(--white); font-size: 1.25rem; font-family: var(--font-title); font-weight: 600; text-align: center; margin-bottom: 0.5rem;">Secure & Trusted</h3>
+            <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.85rem; text-align: center; margin-bottom: 0;">256-Bit SSL Encryption & secure database storage protocols active.</p>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT SECTION -->
+  <section class="policy-content-section" style="padding: 5rem 0; background: var(--light); position: relative; overflow: hidden;">
+    <div style="position: absolute; top: 10%; right: -5%; width: 300px; height: 300px; background: rgba(209, 46, 123, 0.03); filter: blur(80px); border-radius: 50%; pointer-events: none;"></div>
+    <div style="position: absolute; bottom: 10%; left: -5%; width: 400px; height: 400px; background: rgba(76, 27, 111, 0.03); filter: blur(100px); border-radius: 50%; pointer-events: none;"></div>
+    
+    <div class="container reveal">
+      <div class="policy-card" style="background: var(--white); padding: 3.5rem 3rem; border-radius: var(--border-radius); box-shadow: var(--shadow-md); border: 1px solid var(--border); max-width: 900px; margin: 0 auto; position: relative; z-index: 1;">
+        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+          <strong>Effective Date:</strong> July 2, 2026
+        </p>
+        
+        <h2 style="font-size: 1.8rem; margin-top: 0; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">1. Introduction</h2>
+        <p style="margin-bottom: 1.75rem;">Almanah Care and Love Outreach Foundation ("we," "our," or "us") is committed to protecting the privacy of our donors, volunteers, beneficiaries, and website visitors. This Privacy Policy details how we collect, use, share, and protect personal information when you interact with our website at <a href="index.html" style="color: var(--secondary); font-weight: 500;">almanahcarefoundation.org</a> and through our services.</p>
+        
+        <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">2. Information We Collect</h2>
+        <p style="margin-bottom: 1rem;">We collect information that you voluntarily provide to us when using our services. This includes:</p>
+        <ul style="margin-left: 2rem; margin-bottom: 2rem; color: var(--text-muted); list-style-type: square; line-height: 1.8;">
+          <li style="margin-bottom: 0.75rem;"><strong>Contact Information:</strong> Name, email address, phone number, and messages you submit through our contact forms.</li>
+          <li style="margin-bottom: 0.75rem;"><strong>Newsletter Subscriptions:</strong> Your email address when subscribing to receive updates and reports.</li>
+          <li style="margin-bottom: 0.75rem;"><strong>Donation Data:</strong> Information required to process financial contributions, including donation amount, currency, and name (processed securely through third-party processors).</li>
+          <li style="margin-bottom: 0.75rem;"><strong>Nomination Information:</strong> Personal stories or details you choose to share when nominating a widow, child, or community beneficiary for support.</li>
+        </ul>
+        
+        <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">3. How We Use Your Information</h2>
+        <p style="margin-bottom: 1rem;">We utilize the collected information to fulfill our humanitarian mission and operate our services. Specifically, we use your information to:</p>
+        <ul style="margin-left: 2rem; margin-bottom: 2rem; color: var(--text-muted); list-style-type: square; line-height: 1.8;">
+          <li style="margin-bottom: 0.75rem;">Respond to your inquiries and coordinate volunteer or partnership efforts.</li>
+          <li style="margin-bottom: 0.75rem;">Process donations securely and generate tax-deductible or official donation certificates.</li>
+          <li style="margin-bottom: 0.75rem;">Deliver newsletters, impact reports, and updates on our programs.</li>
+          <li style="margin-bottom: 0.75rem;">Evaluate beneficiary nominations and follow up on eligibility.</li>
+          <li style="margin-bottom: 0.75rem;">Optimize our website performance, layout, and user experience.</li>
+        </ul>
+
+        <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">4. Data Protection & Security</h2>
+        <p style="margin-bottom: 1.75rem;">We implement industry-standard administrative, technical, and physical security measures designed designed to safeguard your information from unauthorized access, disclosure, or modification. Financial transactions are encrypted and transmitted securely via certified payment providers. We do not store credit card or raw payment details on our servers.</p>
+
+        <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">5. Sharing Your Information</h2>
+        <p style="margin-bottom: 1.75rem;">We respect your privacy. Almanah Care and Love Outreach Foundation does not sell, trade, rent, or lease your personal information to third parties. We may disclose information if required by law, to enforce our site policies, or to protect our rights, property, or safety.</p>
+
+        <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">6. Third-Party Links</h2>
+        <p style="margin-bottom: 1.75rem;">Our website may contain links to external sites (such as Facebook, Instagram, or partner sites). These platforms operate independently and maintain their own privacy policies. We do not accept responsibility or liability for their content, policies, or activities.</p>
+
+        <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">7. Your Rights & Choice</h2>
+        <p style="margin-bottom: 1.75rem;">You may opt-out of receiving newsletter emails at any time by clicking the "unsubscribe" link in our communications or by contacting us directly. You also have the right to request updates, corrections, or erasure of your personal data stored by us.</p>
+
+        <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">8. Contact Information</h2>
+        <p style="margin-bottom: 1.75rem;">If you have any questions or feedback regarding this Privacy Policy, please reach out to us at:</p>
+        <div style="background: var(--light); padding: 1.5rem; border-radius: var(--border-radius-sm); border-left: 4px solid var(--secondary); font-family: var(--font-title);">
+          <p style="margin: 0; font-weight: 600; color: var(--dark);">Almanah Care and Love Outreach Foundation</p>
+          <p style="margin: 0.5rem 0 0 0; font-size: 0.95rem;">Email: <a href="mailto:info@almanahcarefoundation.org" style="color: var(--primary); font-weight: 700; transition: var(--transition);">info@almanahcarefoundation.org</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-column footer-about">
+          <div class="logo-container">
+            <img src="logo.jpeg" alt="Almanah Foundation Logo">
+            <div class="logo-text">
+              Almanah
+              <span>Care & Love Foundation</span>
+            </div>
+          </div>
+          <p>
+            We empower widows, support young girls, and educate children to establish independent households and sustainable communities.
+          </p>
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 2rem; font-size: 0.95rem; color: rgba(255, 255, 255, 0.8);">
+            <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: var(--accent); flex-shrink: 0;">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+            <span><a href="mailto:info@almanahcarefoundation.org" style="color: var(--accent); font-weight: 600; transition: var(--transition);">info@almanahcarefoundation.org</a></span>
+          </div>
+          <div class="social-links">
+            <a href="https://www.facebook.com/share/1FUR9BJtWo/?mibextid=wwXIfr" class="social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+              <svg viewBox="0 0 24 24"><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m13 2h-2.5A3.5 3.5 0 0 0 12 8.5V11h-2v3h2v7h3v-7h3v-3h-3V9a1 1 0 0 1 1-1h2V5z"/></svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.8 2a3.8 3.8 0 0 0-3.8 3.8v8.4c0 2.1 1.7 3.8 3.8 3.8h8.4c2.1 0 3.8-1.7 3.8-3.8V7.8c0-2.1-1.7-3.8-3.8-3.8H7m8.5 2.1c.5 0 .9.4.9.9s-.4.9-.9.9-.9-.4-.9-.9.4-.9.9-.9M12 6.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11m0 2a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/></svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Twitter">
+              <svg viewBox="0 0 24 24"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.48.75 2.78 1.9 3.55-.7 0-1.35-.2-1.93-.53v.05c0 2.05 1.46 3.76 3.4 4.15-.36.1-.73.15-1.12.15-.27 0-.54-.03-.8-.08.54 1.68 2.1 2.9 3.95 2.94-1.44 1.13-3.26 1.8-5.23 1.8-.34 0-.67-.02-1-.06C2.62 19.39 4.8 20 7.14 20c7.81 0 12.08-6.47 12.08-12.08 0-.18 0-.37-.01-.55.83-.6 1.54-1.35 2.11-2.2-.76.34-1.58.57-2.44.67.87-.52 1.54-1.35 1.85-2.34z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="index.html#pillars">Our Pillars</a></li>
+            <li><a href="index.html#programs">Core Programs</a></li>
+            <li><a href="index.html#faq">FAQ</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Our Programs</h4>
+          <ul class="footer-links">
+            <li><a href="index.html#programs">Widow Empowerment</a></li>
+            <li><a href="index.html#programs">Girl Mentorship</a></li>
+            <li><a href="index.html#programs">Child Scholarships</a></li>
+            <li><a href="index.html#programs">Community Relief</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h4>Newsletter</h4>
+          <p style="color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-bottom: 1rem;">
+            Subscribe to receive reports, success stories, and campaign updates.
+          </p>
+          <form class="newsletter-form" id="newsletter-subscription-form">
+            <input type="email" class="newsletter-input" placeholder="Your Email Address" required
+              id="newsletter-email">
+            <button type="submit" class="btn btn-secondary btn-subscribe">Subscribe</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Almanah Care and Love Outreach Foundation. All Rights Reserved.</p>
+        <div class="footer-bottom-links">
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="terms.html">Terms of Use</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. MOBILE NAVBAR DRAWER TOGGLE
+      const mobileToggle = document.getElementById('mobile-toggle');
+      const navbar = document.getElementById('navbar');
+
+      if (mobileToggle) {
+        mobileToggle.addEventListener('click', () => {
+          const isActive = navbar.classList.toggle('active');
+          mobileToggle.classList.toggle('active', isActive);
+        });
+      }
+
+      // 2. HEADER SCROLL SHRINK EFFECT
+      const mainHeader = document.getElementById('main-header');
+      if (mainHeader) {
+        const handleScroll = () => {
+          if (window.scrollY > 20) {
+            mainHeader.classList.add('header-scrolled');
+          } else {
+            mainHeader.classList.remove('header-scrolled');
+          }
+        };
+        handleScroll();
+        window.addEventListener('scroll', handleScroll);
+      }
+
+      // 3. Scroll-reveal intersection observer
+      const revealElements = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window && revealElements.length > 0) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+            }
+          });
+        }, {
+          threshold: 0.08,
+          rootMargin: '0px 0px -40px 0px'
+        });
+
+        revealElements.forEach(el => observer.observe(el));
+      } else {
+        revealElements.forEach(el => el.classList.add('active'));
+      }
+
+      // 4. BACK TO TOP BUTTON LOGIC
+      const backToTopBtn = document.getElementById('back-to-top');
+      if (backToTopBtn) {
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 300) {
+            backToTopBtn.classList.add('visible');
+          } else {
+            backToTopBtn.classList.remove('visible');
+          }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+          window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+          });
+        });
+      }
+    });
+  </script>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="back-to-top-btn" aria-label="Back to top">
+    <svg viewBox="0 0 24 24">
+      <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+    </svg>
+  </button>
+</body>
+
+</html>

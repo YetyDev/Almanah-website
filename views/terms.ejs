@@ -1,0 +1,189 @@
+<%- include('partials/head', { title: 'Terms of Use' }) %>
+<%- include('partials/header') %>
+
+    <style>
+      .policy-hero-layout {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 4rem;
+        text-align: left;
+        padding: 2rem 0;
+        position: relative;
+        z-index: 3;
+      }
+      .trust-card-glass {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--border-radius);
+        padding: 2.5rem;
+        width: 100%;
+        max-width: 320px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        position: relative;
+        z-index: 2;
+        transform: perspective(1000px) rotateY(-10deg) rotateX(10deg);
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s ease, border-color 0.5s ease;
+      }
+      .trust-card-glass:hover {
+        transform: perspective(1000px) rotateY(-2deg) rotateX(2deg) translateY(-5px) !important;
+        box-shadow: 0 25px 50px rgba(76, 27, 111, 0.25) !important;
+        border-color: rgba(255, 255, 255, 0.18) !important;
+      }
+      @keyframes badgeDotPulseSecondary {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+          box-shadow: 0 0 0 0 rgba(209, 46, 123, 0.7);
+        }
+        70% {
+          transform: scale(1.2);
+          opacity: 0.6;
+          box-shadow: 0 0 0 6px rgba(209, 46, 123, 0);
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+          box-shadow: 0 0 0 0 rgba(209, 46, 123, 0);
+        }
+      }
+      @media (max-width: 991px) {
+        .policy-hero-layout {
+          flex-direction: column;
+          text-align: center !important;
+          gap: 3rem !important;
+          padding: 1rem 0;
+        }
+        .policy-hero-text h1 {
+          text-align: center !important;
+        }
+        .policy-hero-text .about-hero-description {
+          text-align: center !important;
+          margin: 0 auto !important;
+        }
+        .trust-card-glass {
+          transform: none !important;
+        }
+      }
+    </style>
+
+    <!-- HERO SECTION -->
+    <section class="about-hero policy-hero">
+      <div class="about-hero-glow-left"></div>
+      <div class="container">
+        <div class="policy-hero-layout">
+          
+          <!-- Text Content -->
+          <div class="policy-hero-text" style="flex: 1.2;">
+            <div class="about-hero-badge reveal fade-in-up">
+              <span class="badge-dot" style="background-color: var(--accent); animation: badgeDotPulse 2s infinite;"></span>
+              Legal Agreement
+            </div>
+            <h1 class="reveal fade-in-up delay-1" style="text-align: left; margin-bottom: 1.5rem;">Terms of <span>Use</span></h1>
+            <p class="about-hero-description reveal fade-in-up delay-2" style="text-align: left; margin: 0; max-width: 100%;">
+              Welcome to our platform. These Terms of Use govern your access and interaction with Almanah Care and Love Outreach Foundation, ensuring transparent community guidelines.
+            </p>
+          </div>
+          
+          <!-- Visual Document Card -->
+          <div class="policy-hero-visual reveal fade-in-right delay-3" style="flex: 0.8; display: flex; justify-content: center; position: relative;">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 220px; height: 220px; background: radial-gradient(circle, rgba(76, 27, 111, 0.25) 0%, transparent 70%); filter: blur(35px); border-radius: 50%; pointer-events: none; z-index: 1;"></div>
+            
+            <div class="trust-card-glass">
+              <div style="width: 70px; height: 70px; background: rgba(76, 27, 111, 0.6); border: 1px solid rgba(217, 156, 43, 0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto; box-shadow: 0 0 20px rgba(217, 156, 43, 0.3);">
+                <svg viewBox="0 0 24 24" style="width: 36px; height: 36px; fill: var(--secondary);">
+                  <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z" />
+                </svg>
+              </div>
+              <h3 style="color: var(--white); font-size: 1.25rem; font-family: var(--font-title); font-weight: 600; text-align: center; margin-bottom: 0.5rem;">User Agreement</h3>
+              <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.85rem; text-align: center; margin-bottom: 0;">Governs intellectual property licensing, donations, and ethical guidelines.</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTENT SECTION -->
+    <section class="policy-content-section" style="padding: 5rem 0; background: var(--light); position: relative; overflow: hidden;">
+      <div style="position: absolute; top: 10%; right: -5%; width: 300px; height: 300px; background: rgba(209, 46, 123, 0.03); filter: blur(80px); border-radius: 50%; pointer-events: none;"></div>
+      <div style="position: absolute; bottom: 10%; left: -5%; width: 400px; height: 400px; background: rgba(76, 27, 111, 0.03); filter: blur(100px); border-radius: 50%; pointer-events: none;"></div>
+      
+      <div class="container reveal fade-in-up">
+        <div class="policy-card" style="background: var(--white); padding: 3.5rem 3rem; border-radius: var(--border-radius); box-shadow: var(--shadow-md); border: 1px solid var(--border); max-width: 900px; margin: 0 auto; position: relative; z-index: 1;">
+          <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+            <strong>Effective Date:</strong> July 2, 2026
+          </p>
+          
+          <h2 style="font-size: 1.8rem; margin-top: 0; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">1. Agreement to Terms</h2>
+          <p style="margin-bottom: 1.75rem;">By accessing and browsing <a href="/" style="color: var(--secondary); font-weight: 500;">almanahcarefoundation.org</a> (the "Website"), you acknowledge that you have read, understood, and agree to be bound by these Terms of Use and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this Website.</p>
+          
+          <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">2. Use License</h2>
+          <p style="margin-bottom: 1rem;">Permission is granted to view and temporarily download one copy of the educational, informational, and media materials on the Website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:</p>
+          <ul style="margin-left: 2rem; margin-bottom: 2rem; color: var(--text-muted); list-style-type: square; line-height: 1.8;">
+            <li style="margin-bottom: 0.75rem;">Modify, copy, or distribute the materials for any commercial purpose or public display.</li>
+            <li style="margin-bottom: 0.75rem;">Attempt to decompile, reverse engineer, or extract source code from any software contained on the Website.</li>
+            <li style="margin-bottom: 0.75rem;">Remove any copyright, trademark, or other proprietary notations from the materials.</li>
+            <li style="margin-bottom: 0.75rem;">Transfer the materials to another person or "mirror" the materials on any other server.</li>
+          </ul>
+          <p style="margin-bottom: 1.75rem;">This license shall automatically terminate if you violate any of these restrictions and may be terminated by us at any time.</p>
+          
+          <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">3. Donations & Financial Contributions</h2>
+          <p style="margin-bottom: 1rem;">All financial contributions and donations made through the Website are voluntary and processed securely by third-party processors. By donating, you represent that:</p>
+          <ul style="margin-left: 2rem; margin-bottom: 2rem; color: var(--text-muted); list-style-type: square; line-height: 1.8;">
+            <li style="margin-bottom: 0.75rem;">You are authorized to use the chosen payment method.</li>
+            <li style="margin-bottom: 0.75rem;">All information provided is accurate and complete.</li>
+            <li style="margin-bottom: 0.75rem;">Donations are generally non-refundable unless there was a system error, double billing, or unauthorized usage, subject to our review.</li>
+          </ul>
+
+          <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">4. Intellectual Property</h2>
+          <p style="margin-bottom: 1.75rem;">All content, graphics, logos, images, articles, slogans, and overall design elements on this Website are the exclusive property of Almanah Care and Love Outreach Foundation, protected by international copyright, trademark, and other intellectual property laws. Unauthorized reproduction is strictly prohibited.</p>
+
+          <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">5. Disclaimers & Limitation of Liability</h2>
+          <p style="margin-bottom: 1.75rem;">The Website materials are provided on an 'as is' and 'as available' basis. We make no warranties, expressed or implied, and hereby disclaim all other warranties including, without limitation, implied warranties of merchantability or fitness for a particular purpose. Under no circumstances shall the Foundation, its executives, employees, or partners be liable for any damages arising out of the use or inability to use the Website content.</p>
+
+          <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">6. External Links</h2>
+          <p style="margin-bottom: 1.75rem;">We have not reviewed all of the sites linked to our Website and are not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by us. Use of any such linked website is at the user's own risk.</p>
+
+          <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">7. Terms Modification</h2>
+          <p style="margin-bottom: 1.75rem;">Almanah Care and Love Outreach Foundation may revise these Terms of Use for its Website at any time without notice. By using this Website, you are agreeing to be bound by the then current version of these Terms of Use.</p>
+
+          <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">8. Governing Law</h2>
+          <p style="margin-bottom: 1.75rem;">Any claim relating to the Website or these terms shall be governed by and construed in accordance with the laws of the Federal Republic of Nigeria, without regard to its conflict of law provisions.</p>
+
+          <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">9. Contact Information</h2>
+          <p style="margin-bottom: 1.75rem;">For questions, legal notices, or feedback regarding these Terms of Use, please reach out to us at:</p>
+          <div style="background: var(--light); padding: 1.5rem; border-radius: var(--border-radius-sm); border-left: 4px solid var(--secondary); font-family: var(--font-title);">
+            <p style="margin: 0; font-weight: 600; color: var(--dark);">Almanah Care and Love Outreach Foundation</p>
+            <p style="margin: 0.5rem 0 0 0; font-size: 0.95rem;">Email: <a href="mailto:info@almanahcarefoundation.org" style="color: var(--primary); font-weight: 700; transition: var(--transition);">info@almanahcarefoundation.org</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Scroll-reveal intersection observer
+        const revealElements = document.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window && revealElements.length > 0) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+              }
+            });
+          }, {
+            threshold: 0.08,
+            rootMargin: '0px 0px -40px 0px'
+          });
+
+          revealElements.forEach(el => observer.observe(el));
+        } else {
+          revealElements.forEach(el => el.classList.add('active'));
+        }
+      });
+    </script>
+
+<%- include('partials/footer') %>

@@ -15,7 +15,7 @@
 
 <style>
   .admin-dashboard {
-    padding: 4rem 0 8rem 0;
+    padding: 10rem 0 8rem 0;
     background-color: var(--light);
     min-height: 80vh;
   }
@@ -223,11 +223,42 @@
     margin-bottom: 1.5rem;
   }
 
-  @media (max-width: 992px) {
-    .admin-metrics {
-      grid-template-columns: 1fr;
-      gap: 1.25rem;
-    }
+  .btn-danger-sm {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    color: var(--white);
+    border: none;
+    border-radius: var(--border-radius-sm);
+    padding: 0.45rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: var(--font-title);
+  }
+  .btn-danger-sm:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
+  }
+  .btn-signout {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.55rem 1.35rem;
+    font-family: var(--font-title);
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: var(--border-radius-sm);
+    background: linear-gradient(135deg, #d12e7b 0%, #ff5e36 100%);
+    color: var(--white);
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 10px rgba(209, 46, 123, 0.25);
+  }
+  .btn-signout:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(209, 46, 123, 0.35);
+    color: var(--white);
   }
 </style>
 
@@ -239,7 +270,7 @@
         <span class="hero-tagline" style="margin-bottom: 0.75rem;">Backend Portal</span>
         <h1>Admin Control Panel</h1>
       </div>
-      <a href="/admin/logout" class="btn btn-secondary" style="background: linear-gradient(135deg, #d12e7b 0%, #ff5e36 100%); border: none;">Sign Out</a>
+      <a href="/admin/logout" class="btn-signout">Sign Out</a>
     </div>
 
     <!-- Metrics Summary -->
@@ -322,6 +353,7 @@
                 <th>Amount</th>
                 <th>Status</th>
                 <th>Date</th>
+                <th style="text-align: right;">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -331,6 +363,9 @@
                   <td style="font-weight: 700; color: var(--dark);"><%= getSymbol(d.currency) %><%= d.amount.toFixed(2) %></td>
                   <td><span class="badge-status success"><%= d.status %></span></td>
                   <td style="color: var(--text-muted);"><%= new Date(d.donatedAt).toLocaleString() %></td>
+                  <td style="text-align: right;">
+                    <button class="btn-danger-sm" onclick="deleteRecord('donations', '<%= d.id %>')">Delete</button>
+                  </td>
                 </tr>
               <% }) %>
             </tbody>
@@ -354,6 +389,7 @@
                 <th>Contact Info</th>
                 <th>Message</th>
                 <th>Date</th>
+                <th style="text-align: right;">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -366,6 +402,9 @@
                   </td>
                   <td style="max-width: 350px; line-height: 1.5; color: var(--text);"><%= m.message %></td>
                   <td style="color: var(--text-muted); font-size: 0.9rem;"><%= new Date(m.submittedAt).toLocaleString() %></td>
+                  <td style="text-align: right;">
+                    <button class="btn-danger-sm" onclick="deleteRecord('messages', '<%= m.id %>')">Delete</button>
+                  </td>
                 </tr>
               <% }) %>
             </tbody>
@@ -387,6 +426,7 @@
               <tr>
                 <th>Email Address</th>
                 <th>Subscribed On</th>
+                <th style="text-align: right;">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -394,6 +434,9 @@
                 <tr>
                   <td style="font-weight: 600; color: var(--dark);"><%= n.email %></td>
                   <td style="color: var(--text-muted);"><%= new Date(n.subscribedAt).toLocaleString() %></td>
+                  <td style="text-align: right;">
+                    <button class="btn-danger-sm" onclick="deleteRecord('newsletter', '<%= n.id %>')">Delete</button>
+                  </td>
                 </tr>
               <% }) %>
             </tbody>
@@ -425,6 +468,27 @@
         document.getElementById(targetId).classList.add('active');
       });
     });
+
+    // Delete record API caller
+    window.deleteRecord = async (type, id) => {
+      if (!confirm('Are you sure you want to delete this record?')) return;
+      
+      try {
+        const response = await fetch(`/api/admin/${type}/${id}`, {
+          method: 'DELETE'
+        });
+        const data = await response.json();
+        
+        if (data.success) {
+          window.location.reload();
+        } else {
+          alert(data.error || 'Failed to delete record.');
+        }
+      } catch (err) {
+        console.error('Delete error:', err);
+        alert('An error occurred while deleting the record.');
+      }
+    };
 
   });
 </script>

@@ -1,0 +1,84 @@
+<!-- Cookie Consent Banner Component -->
+<div class="cookie-consent-banner" id="cookie-consent-banner">
+  <div class="cookie-consent-content">
+    <div class="cookie-icon-wrapper">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5zm-5-3c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm0-5c-.83 0-1.5-.67-1.5-1.5S7.17 5 8 5s1.5.67 1.5 1.5S8.83 9 8 9zm4 8.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm0-10c-.83 0-1.5-.67-1.5-1.5S11.17 6 12 6s1.5.67 1.5 1.5S12.83 7.5 12 7.5zm5.5 5.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" />
+      </svg>
+    </div>
+    <div class="cookie-text-box">
+      <h5>We Value Your Privacy</h5>
+      <p>We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies. Read our <a href="/privacy">Privacy Policy</a> to learn more.</p>
+    </div>
+  </div>
+  <div class="cookie-actions">
+    <button class="cookie-btn cookie-btn-reject" id="cookie-btn-reject">Reject</button>
+    <button class="cookie-btn cookie-btn-accept" id="cookie-btn-accept">Accept All</button>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const banner = document.getElementById('cookie-consent-banner');
+    const acceptBtn = document.getElementById('cookie-btn-accept');
+    const rejectBtn = document.getElementById('cookie-btn-reject');
+
+    // Helper functions to get and set cookies
+    function setCookie(name, value, days) {
+      let expires = "";
+      if (days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "") + expires + "; path=/; SameSite=Lax; Secure";
+    }
+
+    function getCookie(name) {
+      const nameEQ = name + "=";
+      const ca = document.cookie.split(';');
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i];
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+      }
+      return null;
+    }
+
+    // Check if user already made a choice
+    const consent = getCookie('cookie_consent');
+
+    if (!consent) {
+      // Show banner with a slight delay for smooth entry
+      setTimeout(() => {
+        if (banner) {
+          banner.classList.add('show');
+        }
+      }, 1200);
+    }
+
+    // Handle Accept All
+    if (acceptBtn) {
+      acceptBtn.addEventListener('click', () => {
+        setCookie('cookie_consent', 'accepted', 365);
+        if (banner) {
+          banner.classList.remove('show');
+          banner.classList.add('hide');
+        }
+        console.log('Cookies accepted.');
+      });
+    }
+
+    // Handle Reject
+    if (rejectBtn) {
+      rejectBtn.addEventListener('click', () => {
+        setCookie('cookie_consent', 'rejected', 365);
+        if (banner) {
+          banner.classList.remove('show');
+          banner.classList.add('hide');
+        }
+        console.log('Cookies rejected.');
+      });
+    }
+  });
+</script>

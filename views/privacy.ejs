@@ -1,0 +1,187 @@
+<%- include('partials/head', { title: 'Privacy Policy' }) %>
+<%- include('partials/header') %>
+
+    <style>
+      .policy-hero-layout {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 4rem;
+        text-align: left;
+        padding: 2rem 0;
+        position: relative;
+        z-index: 3;
+      }
+      .trust-card-glass {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: var(--border-radius);
+        padding: 2.5rem;
+        width: 100%;
+        max-width: 320px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        position: relative;
+        z-index: 2;
+        transform: perspective(1000px) rotateY(-10deg) rotateX(10deg);
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s ease, border-color 0.5s ease;
+      }
+      .trust-card-glass:hover {
+        transform: perspective(1000px) rotateY(-2deg) rotateX(2deg) translateY(-5px) !important;
+        box-shadow: 0 25px 50px rgba(209, 46, 123, 0.2) !important;
+        border-color: rgba(255, 255, 255, 0.18) !important;
+      }
+      @keyframes badgeDotPulseSecondary {
+        0% {
+          transform: scale(1);
+          opacity: 1;
+          box-shadow: 0 0 0 0 rgba(209, 46, 123, 0.7);
+        }
+        70% {
+          transform: scale(1.2);
+          opacity: 0.6;
+          box-shadow: 0 0 0 6px rgba(209, 46, 123, 0);
+        }
+        100% {
+          transform: scale(1);
+          opacity: 1;
+          box-shadow: 0 0 0 0 rgba(209, 46, 123, 0);
+        }
+      }
+      @media (max-width: 991px) {
+        .policy-hero-layout {
+          flex-direction: column;
+          text-align: center !important;
+          gap: 3rem !important;
+          padding: 1rem 0;
+        }
+        .policy-hero-text h1 {
+          text-align: center !important;
+        }
+        .policy-hero-text .about-hero-description {
+          text-align: center !important;
+          margin: 0 auto !important;
+        }
+        .trust-card-glass {
+          transform: none !important;
+        }
+      }
+    </style>
+
+    <!-- HERO SECTION -->
+    <section class="about-hero policy-hero">
+      <div class="about-hero-glow-left"></div>
+      <div class="container">
+        <div class="policy-hero-layout">
+          
+          <!-- Text Content -->
+          <div class="policy-hero-text" style="flex: 1.2;">
+            <div class="about-hero-badge reveal fade-in-up">
+              <span class="badge-dot" style="background-color: var(--secondary); animation: badgeDotPulseSecondary 2s infinite;"></span>
+              Legal & Safety
+            </div>
+            <h1 class="reveal fade-in-up delay-1" style="text-align: left; margin-bottom: 1.5rem;">Privacy <span>Policy</span></h1>
+            <p class="about-hero-description reveal fade-in-up delay-2" style="text-align: left; margin: 0; max-width: 100%;">
+              We hold your trust in the highest regard. Our Privacy Policy details our unwavering commitment to protecting your personal information and ensuring data safety.
+            </p>
+          </div>
+          
+          <!-- Visual Shield Card -->
+          <div class="policy-hero-visual reveal fade-in-right delay-3" style="flex: 0.8; display: flex; justify-content: center; position: relative;">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 220px; height: 220px; background: radial-gradient(circle, rgba(209, 46, 123, 0.25) 0%, transparent 70%); filter: blur(35px); border-radius: 50%; pointer-events: none; z-index: 1;"></div>
+            
+            <div class="trust-card-glass">
+              <div style="width: 70px; height: 70px; background: rgba(76, 27, 111, 0.6); border: 1px solid rgba(209, 46, 123, 0.4); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem auto; box-shadow: 0 0 20px rgba(209, 46, 123, 0.3);">
+                <svg viewBox="0 0 24 24" style="width: 36px; height: 36px; fill: var(--accent);">
+                  <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z" />
+                </svg>
+              </div>
+              <h3 style="color: var(--white); font-size: 1.25rem; font-family: var(--font-title); font-weight: 600; text-align: center; margin-bottom: 0.5rem;">Secure & Trusted</h3>
+              <p style="color: rgba(255, 255, 255, 0.6); font-size: 0.85rem; text-align: center; margin-bottom: 0;">256-Bit SSL Encryption & secure database storage protocols active.</p>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTENT SECTION -->
+    <section class="policy-content-section" style="padding: 5rem 0; background: var(--light); position: relative; overflow: hidden;">
+      <div style="position: absolute; top: 10%; right: -5%; width: 300px; height: 300px; background: rgba(209, 46, 123, 0.03); filter: blur(80px); border-radius: 50%; pointer-events: none;"></div>
+      <div style="position: absolute; bottom: 10%; left: -5%; width: 400px; height: 400px; background: rgba(76, 27, 111, 0.03); filter: blur(100px); border-radius: 50%; pointer-events: none;"></div>
+      
+      <div class="container reveal fade-in-up">
+        <div class="policy-card" style="background: var(--white); padding: 3.5rem 3rem; border-radius: var(--border-radius); box-shadow: var(--shadow-md); border: 1px solid var(--border); max-width: 900px; margin: 0 auto; position: relative; z-index: 1;">
+          <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem;">
+            <strong>Effective Date:</strong> July 2, 2026
+          </p>
+          
+          <h2 style="font-size: 1.8rem; margin-top: 0; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">1. Introduction</h2>
+          <p style="margin-bottom: 1.75rem;">Almanah Care and Love Outreach Foundation ("we," "our," or "us") is committed to protecting the privacy of our donors, volunteers, beneficiaries, and website visitors. This Privacy Policy details how we collect, use, share, and protect personal information when you interact with our website at <a href="/" style="color: var(--secondary); font-weight: 500;">almanahcarefoundation.org</a> and through our services.</p>
+          
+          <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">2. Information We Collect</h2>
+          <p style="margin-bottom: 1rem;">We collect information that you voluntarily provide to us when using our services. This includes:</p>
+          <ul style="margin-left: 2rem; margin-bottom: 2rem; color: var(--text-muted); list-style-type: square; line-height: 1.8;">
+            <li style="margin-bottom: 0.75rem;"><strong>Contact Information:</strong> Name, email address, phone number, and messages you submit through our contact forms.</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Newsletter Subscriptions:</strong> Your email address when subscribing to receive updates and reports.</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Donation Data:</strong> Information required to process financial contributions, including donation amount, currency, and name (processed securely through third-party processors).</li>
+            <li style="margin-bottom: 0.75rem;"><strong>Nomination Information:</strong> Personal stories or details you choose to share when nominating a widow, child, or community beneficiary for support.</li>
+          </ul>
+          
+          <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">3. How We Use Your Information</h2>
+          <p style="margin-bottom: 1rem;">We utilize the collected information to fulfill our humanitarian mission and operate our services. Specifically, we use your information to:</p>
+          <ul style="margin-left: 2rem; margin-bottom: 2rem; color: var(--text-muted); list-style-type: square; line-height: 1.8;">
+            <li style="margin-bottom: 0.75rem;">Respond to your inquiries and coordinate volunteer or partnership efforts.</li>
+            <li style="margin-bottom: 0.75rem;">Process donations securely and generate tax-deductible or official donation certificates.</li>
+            <li style="margin-bottom: 0.75rem;">Deliver newsletters, impact reports, and updates on our programs.</li>
+            <li style="margin-bottom: 0.75rem;">Evaluate beneficiary nominations and follow up on eligibility.</li>
+            <li style="margin-bottom: 0.75rem;">Optimize our website performance, layout, and user experience.</li>
+          </ul>
+
+          <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">4. Data Protection & Security</h2>
+          <p style="margin-bottom: 1.75rem;">We implement industry-standard administrative, technical, and physical security measures designed to safeguard your information from unauthorized access, disclosure, or modification. Financial transactions are encrypted and transmitted securely via certified payment providers. We do not store credit card or raw payment details on our servers.</p>
+
+          <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">5. Sharing Your Information</h2>
+          <p style="margin-bottom: 1.75rem;">We respect your privacy. Almanah Care and Love Outreach Foundation does not sell, trade, rent, or lease your personal information to third parties. We may disclose information if required by law, to enforce our site policies, or to protect our rights, property, or safety.</p>
+
+          <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">6. Third-Party Links</h2>
+          <p style="margin-bottom: 1.75rem;">Our website may contain links to external sites (such as Facebook, Instagram, or partner sites). These platforms operate independently and maintain their own privacy policies. We do not accept responsibility or liability for their content, policies, or activities.</p>
+
+          <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">7. Your Rights & Choice</h2>
+          <p style="margin-bottom: 1.75rem;">You may opt-out of receiving newsletter emails at any time by clicking the "unsubscribe" link in our communications or by contacting us directly. You also have the right to request updates, corrections, or erasure of your personal data stored by us.</p>
+
+          <h2 style="font-size: 1.8rem; margin-top: 2.5rem; margin-bottom: 1.25rem; color: var(--primary); font-family: var(--font-title); font-weight: 700;">8. Contact Information</h2>
+          <p style="margin-bottom: 1.75rem;">If you have any questions or feedback regarding this Privacy Policy, please reach out to us at:</p>
+          <div style="background: var(--light); padding: 1.5rem; border-radius: var(--border-radius-sm); border-left: 4px solid var(--secondary); font-family: var(--font-title);">
+            <p style="margin: 0; font-weight: 600; color: var(--dark);">Almanah Care and Love Outreach Foundation</p>
+            <p style="margin: 0.5rem 0 0 0; font-size: 0.95rem;">Email: <a href="mailto:info@almanahcarefoundation.org" style="color: var(--primary); font-weight: 700; transition: var(--transition);">info@almanahcarefoundation.org</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Scroll-reveal intersection observer
+        const revealElements = document.querySelectorAll('.reveal');
+        if ('IntersectionObserver' in window && revealElements.length > 0) {
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+              }
+            });
+          }, {
+            threshold: 0.08,
+            rootMargin: '0px 0px -40px 0px'
+          });
+
+          revealElements.forEach(el => observer.observe(el));
+        } else {
+          revealElements.forEach(el => el.classList.add('active'));
+        }
+      });
+    </script>
+
+<%- include('partials/footer') %>

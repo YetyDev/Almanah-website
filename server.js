@@ -20,6 +20,18 @@ app.set('views', path.join(__dirname, 'views'));
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Redirect requests ending with .html to their clean counterparts (e.g. /privacy.html -> /privacy)
+app.use((req, res, next) => {
+  if (req.path.endsWith('.html')) {
+    const cleanPath = req.path.slice(0, -5);
+    if (cleanPath === '/index') {
+      return res.redirect(301, '/');
+    }
+    return res.redirect(301, cleanPath);
+  }
+  next();
+});
+
 // Copy the generated background image from the artifacts directory to the public workspace
 const sourceImg = "C:\\Users\\Dell\\.gemini\\antigravity-ide\\brain\\f645e1b1-6ec5-4138-9496-d8a9a6e400cd\\hero_background_1782729110586.png";
 const destImg1 = path.join(__dirname, 'public', 'images', 'hero-bg.png');
@@ -119,6 +131,71 @@ app.get('/impact', (req, res) => {
 // Contact Us Page
 app.get('/contact', (req, res) => {
   res.render('contact', { page: 'contact' });
+});
+
+// Privacy Policy Page
+app.get('/privacy', (req, res) => {
+  res.render('privacy', { page: 'privacy' });
+});
+
+// Terms of Use Page
+app.get('/terms', (req, res) => {
+  res.render('terms', { page: 'terms' });
+});
+
+// Middleware to check auth for API endpoints
+const checkAPIAuth = (req, res, next) => {
+  const cookies = parseCookies(req.headers.cookie);
+  if (cookies.admin_session && activeSessions.has(cookies.admin_session)) {
+    next();
+  } else {
+    res.status(401).json({ success: false, error: 'Unauthorized.' });
+  }
+};
+
+// Delete donation record route
+app.delete('/api/admin/donations/:id', checkAPIAuth, (req, res) => {
+  const { id } = req.params;
+  let donations = readDB(DONATIONS_FILE);
+  const initialLength = donations.length;
+  donations = donations.filter(d => d.id !== id);
+  
+  if (donations.length < initialLength) {
+    writeDB(DONATIONS_FILE, donations);
+    res.json({ success: true, message: 'Donation record deleted successfully!' });
+  } else {
+    res.status(404).json({ success: false, error: 'Donation record not found.' });
+  }
+});
+
+// Delete newsletter subscription record route
+app.delete('/api/admin/newsletter/:id', checkAPIAuth, (req, res) => {
+  const { id } = req.params;
+  let newsletter = readDB(NEWSLETTER_FILE);
+  const initialLength = newsletter.length;
+  newsletter = newsletter.filter(n => n.id !== id);
+  
+  if (newsletter.length < initialLength) {
+    writeDB(NEWSLETTER_FILE, newsletter);
+    res.json({ success: true, message: 'Subscriber record deleted successfully!' });
+  } else {
+    res.status(404).json({ success: false, error: 'Subscriber record not found.' });
+  }
+});
+
+// Delete contact message record route
+app.delete('/api/admin/messages/:id', checkAPIAuth, (req, res) => {
+  const { id } = req.params;
+  let messages = readDB(MESSAGES_FILE);
+  const initialLength = messages.length;
+  messages = messages.filter(m => m.id !== id);
+  
+  if (messages.length < initialLength) {
+    writeDB(MESSAGES_FILE, messages);
+    res.json({ success: true, message: 'Message record deleted successfully!' });
+  } else {
+    res.status(404).json({ success: false, error: 'Message record not found.' });
+  }
 });
 
 // --- Admin Authentication State & Helpers ---

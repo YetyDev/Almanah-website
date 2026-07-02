@@ -17,10 +17,10 @@
           <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: var(--accent); flex-shrink: 0;">
             <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
           </svg>
-          <span><a href="mailto:info@almanahcarefoundation.ng" style="color: var(--accent); font-weight: 600; transition: var(--transition);">info@almanahcarefoundation.ng</a></span>
+          <span><a href="mailto:info@almanahcarefoundation.org" style="color: var(--accent); font-weight: 600; transition: var(--transition);">info@almanahcarefoundation.org</a></span>
         </div>
         <div class="social-links">
-          <a href="#" class="social-link" aria-label="Facebook">
+          <a href="https://www.facebook.com/share/1FUR9BJtWo/?mibextid=wwXIfr" class="social-link" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
             <svg viewBox="0 0 24 24"><path d="M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2m13 2h-2.5A3.5 3.5 0 0 0 12 8.5V11h-2v3h2v7h3v-7h3v-3h-3V9a1 1 0 0 1 1-1h2V5z"/></svg>
           </a>
           <a href="#" class="social-link" aria-label="Instagram">
@@ -70,8 +70,8 @@
     <div class="footer-bottom">
       <p>© 2026 Almanah Care and Love Outreach Foundation. All Rights Reserved.</p>
       <div class="footer-bottom-links">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Use</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Use</a>
       </div>
     </div>
   </div>
@@ -174,7 +174,35 @@
       });
     }
 
+    // 4. BACK TO TOP BUTTON LOGIC
+    const backToTopBtn = document.getElementById('back-to-top');
+    if (backToTopBtn) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToTopBtn.classList.add('visible');
+        } else {
+          backToTopBtn.classList.remove('visible');
+        }
+      });
+      
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+    }
+
   });
 </script>
+
+<%- include('cookie-consent') %>
+
+<!-- Back to Top Button -->
+<button id="back-to-top" class="back-to-top-btn" aria-label="Back to top">
+  <svg viewBox="0 0 24 24">
+    <path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z" />
+  </svg>
+</button>
 </body>
 </html>
