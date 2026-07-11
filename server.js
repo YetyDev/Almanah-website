@@ -103,6 +103,19 @@ const writeDB = (filePath, data) => {
 
 // --- Page Routes ---
 
+// cPanel, Webmail, and WHM redirects for hosting compatibility
+app.get('/cpanel', (req, res) => {
+  res.redirect(`https://${req.hostname}:2083`);
+});
+
+app.get('/webmail', (req, res) => {
+  res.redirect(`https://${req.hostname}:2096`);
+});
+
+app.get('/whm', (req, res) => {
+  res.redirect(`https://${req.hostname}:2087`);
+});
+
 // Home Page
 app.get('/', (req, res) => {
   res.render('index', { page: 'home' });
