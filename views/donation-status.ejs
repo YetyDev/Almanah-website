@@ -1,0 +1,154 @@
+<%- include('partials/head', { title: 'Donation Status' }) %>
+<%- include('partials/header') %>
+
+<style>
+  .donation-status-section {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 1.5rem 4rem;
+  }
+  .donation-status-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--border-radius, 16px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    max-width: 520px;
+    width: 100%;
+    padding: 3rem 2.5rem;
+    text-align: center;
+  }
+  .status-icon {
+    width: 84px;
+    height: 84px;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+  }
+  .status-icon.success { background: rgba(46, 204, 113, 0.15); color: #2ecc71; border: 2px solid rgba(46, 204, 113, 0.4); }
+  .status-icon.failed { background: rgba(231, 76, 60, 0.15); color: #e74c3c; border: 2px solid rgba(231, 76, 60, 0.4); }
+  .status-icon.processing { background: rgba(241, 196, 15, 0.12); color: #f1c40f; border: 2px solid rgba(241, 196, 15, 0.35); }
+  .status-icon.processing .spinner {
+    width: 42px;
+    height: 42px;
+    border: 4px solid rgba(241, 196, 15, 0.25);
+    border-top-color: #f1c40f;
+    border-radius: 50%;
+    animation: donation-spin 1s linear infinite;
+  }
+  @keyframes donation-spin { to { transform: rotate(360deg); } }
+  .donation-status-card h1 { font-size: 1.8rem; margin-bottom: 0.8rem; }
+  .donation-status-card p.status-message { opacity: 0.85; line-height: 1.6; margin-bottom: 1.8rem; }
+  .status-details {
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 1.2rem 1.4rem;
+    margin-bottom: 1.8rem;
+  }
+  .status-details .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.35rem 0;
+    font-size: 0.95rem;
+  }
+  .status-details .row .label { opacity: 0.6; }
+  .status-details .row .value { font-weight: 600; text-align: right; word-break: break-all; }
+  .status-actions { display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap; }
+  .status-refresh-note { font-size: 0.85rem; opacity: 0.55; margin-top: 1.4rem; }
+</style>
+
+<%
+  const PROGRAM_LABELS = { general: 'General Fund', education: 'Child Sponsorship', empowerment: 'Widow Micro-Grant' };
+  const formatAmount = (d) => `${d.currency} ${Number(d.amount).toLocaleString('en-US', { minimumFractionDigits: 2 })}`;
+%>
+
+<section class="donation-status-section">
+  <div class="donation-status-card">
+    <% if (state === 'success') { %>
+      <div class="status-icon success">&#10003;</div>
+      <h1>Thank You, <%= donation.donorName %>!</h1>
+      <p class="status-message">
+        Your donation has been received and confirmed. Your generosity directly
+        supports widows, young women, and children in our community.
+        A receipt from our payment partner has been sent to your email.
+      </p>
+    <% } else if (state === 'processing') { %>
+      <div class="status-icon processing"><span class="spinner"></span></div>
+      <h1>Confirming Your Payment&hellip;</h1>
+      <p class="status-message">
+        We are waiting for our payment partner to confirm your donation.
+        This usually takes less than a minute &mdash; this page will update
+        automatically, and you don't need to do anything.
+      </p>
+    <% } else if (state === 'failed') { %>
+      <div class="status-icon failed">&#10005;</div>
+      <h1>Payment Not Completed</h1>
+      <p class="status-message">
+        Unfortunately we could not confirm this donation payment. You have most
+        likely not been charged. If your bank shows a charge, please
+        <a href="/contact">contact us</a> with the reference below and we will
+        resolve it promptly.
+      </p>
+    <% } else { %>
+      <div class="status-icon failed">?</div>
+      <h1>Donation Not Found</h1>
+      <p class="status-message">
+        We couldn't identify this donation. If you completed a payment, please
+        <a href="/contact">contact us</a> with the details of your payment and
+        we will resolve it promptly.
+      </p>
+    <% } %>
+
+    <% if (donation) { %>
+      <div class="status-details">
+        <div class="row"><span class="label">Amount</span><span class="value"><%= formatAmount(donation) %></span></div>
+        <div class="row"><span class="label">Program</span><span class="value"><%= PROGRAM_LABELS[donation.program] || donation.program %></span></div>
+        <div class="row"><span class="label">Reference</span><span class="value"><%= donation.id %></span></div>
+        <% if (state === 'success' && donation.paidAt) { %>
+          <div class="row"><span class="label">Confirmed</span><span class="value"><%= new Date(donation.paidAt).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) %></span></div>
+        <% } %>
+      </div>
+    <% } else if (reference) { %>
+      <div class="status-details">
+        <div class="row"><span class="label">Reference</span><span class="value"><%= reference %></span></div>
+      </div>
+    <% } %>
+
+    <div class="status-actions">
+      <a href="/" class="btn btn-primary">Back to Home</a>
+      <% if (state === 'failed') { %>
+        <a href="/#donation" class="btn btn-secondary">Try Again</a>
+      <% } else if (state === 'success') { %>
+        <a href="/programs" class="btn btn-secondary">See Your Impact</a>
+      <% } %>
+    </div>
+
+    <% if (state === 'processing') { %>
+      <p class="status-refresh-note" id="status-refresh-note">Checking again automatically every few seconds&hellip;</p>
+      <script>
+        (function () {
+          var key = 'donation-status-checks-<%= reference %>';
+          var checks = Number(sessionStorage.getItem(key) || 0);
+          if (checks < 20) {
+            sessionStorage.setItem(key, checks + 1);
+            setTimeout(function () { window.location.reload(); }, 6000);
+          } else {
+            document.getElementById('status-refresh-note').textContent =
+              'This is taking longer than usual. You can safely close this page — ' +
+              'your receipt will arrive by email once the payment is confirmed.';
+          }
+        })();
+      </script>
+    <% } %>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

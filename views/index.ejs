@@ -9,7 +9,7 @@
     <div class="hero-copy">
       <span class="hero-tagline reveal fade-in-up">
         <span class="pulse-dot"></span>
-        Almanah Outreach Foundation
+        Almanah Love & Care Foundation
       </span>
       <h1 class="reveal fade-in-up delay-1">Hope, <span class="text-gradient">dignity</span>, and <span class="text-gradient-alt">opportunity</span> for widows and their children.</h1>
       <p class="hero-description reveal fade-in-up delay-2">
@@ -189,7 +189,7 @@
         <span class="section-tagline">Our Identity</span>
         <h2>Who We <span class="text-gradient">Are</span></h2>
         <p class="about-story">
-          Almanah Care and Love Outreach Foundation is a registered nonprofit organization dedicated to restoring hope, fostering resilience, and establishing self-reliance for vulnerable widows, young women, and children. We operate on the foundational belief that empowerment transforms families and secures future generations.
+          Almanah Love and Care Foundation is a registered nonprofit organization dedicated to restoring hope, fostering resilience, and establishing self-reliance for vulnerable widows, young women, and children. We operate on the foundational belief that empowerment transforms families and secures future generations.
         </p>
       </div>
     </div>
@@ -485,6 +485,14 @@
       </div>
 
       <form id="donation-form">
+        <div class="form-group-modern">
+          <input type="text" class="form-control-modern" placeholder=" " id="donor-name" autocomplete="name">
+          <label class="form-label-modern" for="donor-name">Your Name</label>
+        </div>
+        <div class="form-group-modern">
+          <input type="email" class="form-control-modern" placeholder=" " id="donor-email" autocomplete="email" required>
+          <label class="form-label-modern" for="donor-email">Email Address</label>
+        </div>
         <button type="submit" class="btn btn-secondary btn-submit">Proceed to Secure Donation</button>
       </form>
 
@@ -577,37 +585,48 @@
           alert('Please select or input a donation amount.');
           return;
         }
+
+        const donorName = document.getElementById('donor-name').value;
+        const donorEmail = document.getElementById('donor-email').value;
+        const submitButton = donationForm.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.textContent;
+        submitButton.disabled = true;
+        submitButton.textContent = 'Opening Secure Checkout...';
         
         fetch('/api/donate', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ amount: selectedDonation, program: selectedProgram, currency: selectedCurrency })
+          body: JSON.stringify({
+            amount: selectedDonation,
+            program: selectedProgram,
+            currency: selectedCurrency,
+            donorName,
+            donorEmail
+          })
         })
         .then(res => res.json())
         .then(data => {
-          if (data.success) {
-            window.showSuccessAlert(`Secure Donation of ${selectedSymbol}${selectedDonation} (${selectedCurrency}) for the ${selectedProgram.toUpperCase()} fund initiated! Thank you for your support.`);
-            donationForm.reset();
-            tierBtns.forEach(b => b.classList.remove('active'));
-            // Reset predefined tiers with current symbol
-            tierBtns.forEach(tBtn => {
-              const val = tBtn.getAttribute('data-val');
-              tBtn.textContent = selectedSymbol + val;
-            });
-            document.querySelector('.tier-btn[data-val="25"]').classList.add('active');
-            selectedDonation = 25;
+          if (data.success && data.checkoutUrl) {
+            window.location.href = data.checkoutUrl;
           } else {
             alert(data.error || 'Something went wrong processing your donation.');
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
           }
         })
         .catch(err => {
           console.error('Donation submission error:', err);
           alert('An error occurred. Please try again.');
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
         });
       });
     }
+
+    // Donation results are now shown on the dedicated /donation/status page,
+    // which the payment provider callbacks redirect to.
 
     // Scripts for success story carousel, FAQ accordion, and contact form submission 
     // have been relocated to their respective subpages (Impact & Contact Us) to optimize homepage performance.

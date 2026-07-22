@@ -287,7 +287,7 @@
           <span>Total Received</span>
           <% 
             let totals = {};
-            donations.forEach(d => {
+            donations.filter(d => d.status === 'Completed').forEach(d => {
               const cur = d.currency || 'USD';
               totals[cur] = (totals[cur] || 0) + d.amount;
             });
@@ -352,6 +352,7 @@
                 <th>Transaction ID</th>
                 <th>Amount</th>
                 <th>Status</th>
+                <th>Provider</th>
                 <th>Date</th>
                 <th style="text-align: right;">Action</th>
               </tr>
@@ -361,7 +362,8 @@
                 <tr>
                   <td style="font-family: monospace; font-weight: 600; color: var(--primary);"><%= d.id %></td>
                   <td style="font-weight: 700; color: var(--dark);"><%= getSymbol(d.currency) %><%= d.amount.toFixed(2) %></td>
-                  <td><span class="badge-status success"><%= d.status %></span></td>
+                  <td><span class="badge-status <%= d.status === 'Completed' ? 'success' : '' %>"><%= d.status %></span></td>
+                  <td style="text-transform: capitalize; color: var(--text-muted);"><%= d.provider || 'manual' %></td>
                   <td style="color: var(--text-muted);"><%= new Date(d.donatedAt).toLocaleString() %></td>
                   <td style="text-align: right;">
                     <button class="btn-danger-sm" onclick="deleteRecord('donations', '<%= d.id %>')">Delete</button>

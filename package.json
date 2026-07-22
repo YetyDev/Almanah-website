@@ -3,13 +3,18 @@
   "version": "1.0.0",
   "description": "Redesigned Almana Care and Love Outreach Foundation Website with Node.js backend",
   "main": "server.js",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js"
   },
   "dependencies": {
+    "dotenv": "^17.4.2",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
+    "googleapis": "^173.0.0",
     "morgan": "^1.10.0"
   },
   "author": "",
